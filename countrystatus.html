@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+		window.onload = function() {
+			document.getElementById("Save").onclick = function fun() {
+				var x = document.forms["myForm"]["ip_address"].value;
+				var Url = "http://api.ipinfodb.com/v3/ip-city/?key=9d64fcfdfacc213c7ddf4ef911dfe97b55e4696be3532bf8302876c09ebad06b&format=json&ip=" +x;
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', Url, true);
+				xhr.send();
+				xhr.onreadystatechange = processRequest;
+				function processRequest(e) {
+				 if (xhr.readyState == 4 && xhr.status == 200) {
+					//	alert(xhr.responseText);
+						var response1 = JSON.parse(xhr.responseText);
+						document.getElementById("statusCode").innerHTML = response1.name + ", " + response1.statusCode;
+						 document.getElementById("statusCode").innerHTML = response1.statusCode;
+						 document.getElementById("statusMessage").innerHTML = response1.statusMessage;
+						 document.getElementById("ipAddress").innerHTML = response1.ipAddress;
+						 document.getElementById("countryCode").innerHTML = response1.countryCode;
+						 document.getElementById("countryName").innerHTML = response1.countryName;
+						 document.getElementById("regionName").innerHTML = response1.regionName;
+						 document.getElementById("cityName").innerHTML = response1.cityName;
+						 document.getElementById("zipCode").innerHTML = response1.zipCode;
+						 document.getElementById("latitude").innerHTML = response1.latitude;
+						 document.getElementById("longitude").innerHTML = response1.longitude;
+						 document.getElementById("timeZone").innerHTML = response1.timeZone;
+					}
+				}
+			}
+		}
+</script>
+</head>
+<body>
+<center>
+Country Status
+ <br> <br>
+ <form name="myForm">
+    <input type="text"  name="ip_address"/>
+    <input type="button" id="Save" onclick="f1()" value="Submit"/>
+</form>
+
+  <br> <br>
+ <table border="1">
+ <tr><td bgcolor="#D3D3D3">statusCode :</td><td id="statusCode"></td></tr>
+ <tr><td bgcolor="#D3D3D3">statusMessage :</td><td id="statusMessage"></td></tr>
+ <tr><td bgcolor="#D3D3D3">ipAddress :</td><td id="ipAddress"></td></tr>
+ <tr><td bgcolor="#D3D3D3">countryCode :</td><td id="countryCode"></td></tr>
+ <tr><td bgcolor="#D3D3D3">countryName :</td><td id="countryName"></td></tr>
+ <tr><td bgcolor="#D3D3D3">regionName :</td><td id="regionName"></td></tr>
+ <tr><td bgcolor="#D3D3D3">cityName :</td><td id="cityName"></td></tr>
+ <tr><td bgcolor="#D3D3D3">zipCode :</td><td id="zipCode"></td></tr>
+ <tr><td bgcolor="#D3D3D3">latitude :</td><td id="latitude"></td></tr>
+ <tr><td bgcolor="#D3D3D3">longitude :</td><td id="longitude"></td></tr>
+ <tr><td bgcolor="#D3D3D3">timeZone :</td><td id="timeZone"></td></tr>  
+ </table>
+</body>
+</html>
